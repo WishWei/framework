@@ -34,6 +34,8 @@
         <commons_lang3_version>3.1</commons_lang3_version>
         <commons_collections_version>3.2.1</commons_collections_version>
         <mail_version>1.4.7</mail_version>
+        <jedis_version>2.3.1</jedis_version>
+        <spring_data_redis_version>1.5.0.RELEASE</spring_data_redis_version>
     </properties>
 
     <dependencyManagement>
@@ -196,6 +198,16 @@
                 <artifactId>junit</artifactId>
                 <version>${junit_versoin}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring_data_redis_version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
