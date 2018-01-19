@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wish</groupId>
+    <artifactId>framework</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>dao</module>
+        <module>service</module>
+        <module>common</module>
+        <module>model</module>
+        <module>web</module>
+    </modules>
+
+    <properties>
+        <frame_version>1.0-SNAPSHOT</frame_version>
+        <spring_version>4.2.6.RELEASE</spring_version>
+        <springfox_version>2.5.0</springfox_version>
+        <servlet_version>3.0.1</servlet_version>
+        <gson_version>2.6.2</gson_version>
+        <aspectjweaver_version>1.8.9</aspectjweaver_version>
+        <aspectjrt_version>1.8.9</aspectjrt_version>
+        <junit_versoin>3.8.1</junit_versoin>
+        <mysql_version>5.1.20</mysql_version>
+        <slf4j_version>1.7.25</slf4j_version>
+        <log4j_version>1.2.17</log4j_version>
+        <mybatis_version>3.2.7</mybatis_version>
+        <mybatis_spring_version>1.3.0</mybatis_spring_version>
+        <jackson_databind_version>2.7.5</jackson_databind_version>
+        <commons_lang3_version>3.1</commons_lang3_version>
+        <commons_collections_version>3.2.1</commons_collections_version>
+        <mail_version>1.4.7</mail_version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.wish</groupId>
+                <artifactId>model</artifactId>
+                <version>${frame_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wish</groupId>
+                <artifactId>dao</artifactId>
+                <version>${frame_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wish</groupId>
+                <artifactId>service</artifactId>
+                <version>${frame_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wish</groupId>
+                <artifactId>common</artifactId>
+                <version>${frame_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis_spring_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson_databind_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons_lang3_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons_collections_version}</version>
+            </dependency>
+
+            <!-- aspectj start -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectjrt_version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>jaxb-impl</artifactId>
+                        <groupId>com.sun.xml.bind</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver_version}</version>
+            </dependency>
+            <!-- aspectj end -->
+
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${mail_version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit_versoin}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://nexus.bbdops.com/nexus/content/groups/repo/</url>
+        </repository>
+        <repository>
+            <id>releases</id>
+            <url>http://nexus.bbdops.com/nexus/content/groups/repo/</url>
+        </repository>
+    </repositories>
+
+
+
+</project>
