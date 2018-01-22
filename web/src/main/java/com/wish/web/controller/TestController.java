@@ -8,11 +8,15 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by wish on 2018/1/19.
@@ -59,6 +63,55 @@ public class TestController {
     public ResponseBean<TestVO> findTestVO(@RequestParam("id") String id) throws Exception{
         TestVO testVO = testService.findById(id);
         return ResponseBean.responseSuccess(testVO);
+    }
+
+    @RequestMapping(value = "/addToQueen.do", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "添加到队列", notes = "添加到队列")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "name", value = "名称", required = true, paramType = "query", dataType = "String")
+    })
+    public ResponseBean<TestVO> addToQueen(@RequestParam("id") String id, @RequestParam("name") String name) throws Exception{
+        TestVO testVO = new TestVO();
+        testVO.setId(id);
+        testVO.setName(name);
+        testService.addToQueen(testVO);
+        return ResponseBean.responseSuccess("添加到队列成功");
+    }
+
+
+    @RequestMapping(value = "/findQueenList.do", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "查询的队列", notes = "返回队列元素")
+    public ResponseBean<List<TestVO>> findQueenList() throws Exception{
+        List<TestVO> testVOList = testService.getQueenElements();
+        return ResponseBean.responseSuccess(testVOList);
+    }
+
+    @RequestMapping(value = "/addToTop.do", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "添加到排行榜", notes = "添加到排行榜")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "name", value = "名称", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "score", value = "分数", required = true, paramType = "query", dataType = "String")
+    })
+    public ResponseBean<TestVO> addToTop(@RequestParam("id") String id, @RequestParam("name") String name,  @RequestParam("score")double score) throws Exception{
+        TestVO testVO = new TestVO();
+        testVO.setId(id);
+        testVO.setName(name);
+        testService.addToZset(testVO, score);
+        return ResponseBean.responseSuccess("添加到排行榜成功");
+    }
+
+
+    @RequestMapping(value = "/findTopElements.do", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "查询排行榜", notes = "返回排行榜元素")
+    public ResponseBean<Set<ZSetOperations.TypedTuple<TestVO>>> findTopElements() throws Exception{
+        Set<ZSetOperations.TypedTuple<TestVO>> set = testService.findInZSet();
+        return ResponseBean.responseSuccess(set);
     }
 
 }

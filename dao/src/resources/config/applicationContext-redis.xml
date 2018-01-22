@@ -9,16 +9,16 @@
                             annotation-config="true" />
 
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="10"></property>
-        <property name="maxIdle" value="10"></property>
-        <property name="minIdle" value="2"></property>
-        <property name="maxWaitMillis" value="15000"></property>
-        <property name="minEvictableIdleTimeMillis" value="300000"></property>
-        <property name="numTestsPerEvictionRun" value="3"></property>
-        <property name="timeBetweenEvictionRunsMillis" value="60000"></property>
-        <property name="testOnBorrow" value="true"></property>
-        <property name="testOnReturn" value="true"></property>
-        <property name="testWhileIdle" value="true"></property>
+        <property name="maxTotal" value="${redis.pool.maxTotal}"></property>
+        <property name="maxIdle" value="${redis.pool.maxIdle}"></property>
+        <property name="minIdle" value="${redis.pool.minIdle}"></property>
+        <property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}"></property>
+        <property name="minEvictableIdleTimeMillis" value="${redis.pool.minEvictableIdleTimeMillis}"></property>
+        <property name="numTestsPerEvictionRun" value="${redis.pool.numTestsPerEvictionRun}"></property>
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.pool.timeBetweenEvictionRunsMillis}"></property>
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"></property>
+        <property name="testOnReturn" value="${redis.pool.testOnReturn}"></property>
+        <property name="testWhileIdle" value="${redis.pool.testWhileIdle}"></property>
     </bean>
 
     <bean id="jedisConnectionFactory"
@@ -27,9 +27,9 @@
         <property name="hostName" value="${redis.hostName}" />
         <property name="port" value="${redis.prot}" />
         <property name="timeout" value="${redis.timeout}" />
-        <property name="database" value="0" />
-        <property name="password" value="" />
-        <property name="usePool" value="true" />
+        <property name="database" value="${redis.database}" />
+        <property name="password" value="${redis.password}" />
+        <property name="usePool" value="${redis.usePool}" />
         <property name="poolConfig" ref="jedisPoolConfig" />
     </bean>
 

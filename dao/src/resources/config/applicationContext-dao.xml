@@ -7,8 +7,6 @@
 
     <import resource="applicationContext-redis.xml"/>
 
-
-
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${driverClassName}" />
         <property name="url" value="${url}" />
