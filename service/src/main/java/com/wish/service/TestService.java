@@ -1,5 +1,7 @@
 package com.wish.service;
 
+import com.wish.model.vo.Employee;
+import com.wish.model.vo.PageInfo;
 import com.wish.model.vo.TestVO;
 import org.springframework.data.redis.core.ZSetOperations;
 
@@ -21,4 +23,8 @@ public interface TestService {
     void addToZset(TestVO testVO, double score);
 
     Set<ZSetOperations.TypedTuple<TestVO>> findInZSet();
+
+    Employee findEmployeeById(String id);
+
+    PageInfo<Employee> searchEmployeesByInterest(String key, int page, int pageSize);
 }

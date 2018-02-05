@@ -36,6 +36,7 @@
         <mail_version>1.4.7</mail_version>
         <jedis_version>2.3.1</jedis_version>
         <spring_data_redis_version>1.5.0.RELEASE</spring_data_redis_version>
+        <es_version>5.6.3</es_version>
     </properties>
 
     <dependencyManagement>
@@ -208,6 +209,11 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-redis</artifactId>
                 <version>${spring_data_redis_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>${es_version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

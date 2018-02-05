@@ -17,9 +17,9 @@ public class PageInfo <T>{
     @ApiModelProperty("每页条数")
     private int pageSize;
     @ApiModelProperty("总数量")
-    private int totalCount;
+    private long totalCount;
     @ApiModelProperty("总页数")
-    private int totalPage;
+    private long totalPage;
 
     public List<T> getItems() {
         return items;
@@ -45,22 +45,22 @@ public class PageInfo <T>{
         this.pageSize = pageSize;
     }
 
-    public int getTotalCount() {
+    public long getTotalCount() {
         return totalCount;
     }
 
-    public void setTotalCount(int totalCount) {
+    public void setTotalCount(long totalCount) {
         this.totalCount = totalCount;
         if (this.pageSize > 0) {
             this.totalPage = (totalCount - 1) % this.pageSize + 1;
         }
     }
 
-    public int getTotalPage() {
+    public long getTotalPage() {
         return totalPage;
     }
 
-    public void setTotalPage(int totalPage) {
+    public void setTotalPage(long totalPage) {
         this.totalPage = totalPage;
     }
 }

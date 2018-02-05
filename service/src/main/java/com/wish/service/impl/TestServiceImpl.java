@@ -1,6 +1,9 @@
 package com.wish.service.impl;
 
+import com.wish.dao.es.client.TestEsDao;
 import com.wish.dao.redis.TestRedisDao;
+import com.wish.model.vo.Employee;
+import com.wish.model.vo.PageInfo;
 import com.wish.model.vo.TestVO;
 import com.wish.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class TestServiceImpl implements TestService{
 
     @Autowired
     private TestRedisDao testRedisDao;
+
+    @Autowired
+    private TestEsDao testEsDao;
 
     private final static String QUEEN_NAME = "testQueen";
 
@@ -53,5 +59,14 @@ public class TestServiceImpl implements TestService{
     @Override
     public Set<ZSetOperations.TypedTuple<TestVO>> findInZSet() {
         return testRedisDao.findInZSet(TOP_NAME);
+    }
+
+    @Override
+    public Employee findEmployeeById(String id) {
+        return testEsDao.findEmployeeById(id);
+    }
+
+    public PageInfo<Employee> searchEmployeesByInterest(String key, int page, int pageSize) {
+        return testEsDao.searchByInterests(key, page, pageSize);
     }
 }

@@ -1,5 +1,7 @@
 package com.wish.web.controller;
 
+import com.wish.model.vo.Employee;
+import com.wish.model.vo.PageInfo;
 import com.wish.model.vo.ResponseBean;
 import com.wish.model.vo.TestVO;
 import com.wish.service.TestService;
@@ -113,5 +115,31 @@ public class TestController {
         Set<ZSetOperations.TypedTuple<TestVO>> set = testService.findInZSet();
         return ResponseBean.responseSuccess(set);
     }
+
+    @RequestMapping(value = "/findEmployeeById.do", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "根据id查询员工", notes = "根据id查询员工")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, paramType = "query", dataType = "String")
+    })
+    public ResponseBean<Employee> findEmployeeById(String id) throws Exception{
+        Employee employee = testService.findEmployeeById(id);
+        return ResponseBean.responseSuccess(employee);
+    }
+
+    @RequestMapping(value = "/searchEmployeesByInterest.do", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "根据兴趣搜索员工", notes = "根据兴趣搜索员工")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "key", value = "关键字", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "page", value = "页", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "pageSize", value = "每页行数", required = true, paramType = "query", dataType = "String")
+    })
+    public ResponseBean<PageInfo<Employee>> searchEmployeesByInterest(String key, int page, int pageSize) throws Exception{
+        PageInfo<Employee> pageInfo = testService.searchEmployeesByInterest(key, page, pageSize);
+        return ResponseBean.responseSuccess(pageInfo);
+    }
+
+
 
 }

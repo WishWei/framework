@@ -21,6 +21,7 @@
             <list>
                 <value>classpath:config/db.properties</value>
                 <value>classpath:config/redis.properties</value>
+                <value>classpath:config/es.properties</value>
             </list>
         </property>
     </bean>
