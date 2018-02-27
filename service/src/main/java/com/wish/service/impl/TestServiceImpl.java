@@ -69,4 +69,5 @@ public class TestServiceImpl implements TestService{
     public PageInfo<Employee> searchEmployeesByInterest(String key, int page, int pageSize) {
         return testEsDao.searchByInterests(key, page, pageSize);
     }
+
 }

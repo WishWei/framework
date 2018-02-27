@@ -5,6 +5,7 @@ import com.wish.model.vo.PageInfo;
 import com.wish.model.vo.ResponseBean;
 import com.wish.model.vo.TestVO;
 import com.wish.service.TestService;
+import com.wish.service.mq.MessageProducer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -30,6 +31,9 @@ public class TestController {
 
     @Autowired
     private TestService testService;
+
+    @Autowired
+    private MessageProducer messageProducer;
 
     @RequestMapping(value = "/test.do", method = RequestMethod.GET)
     @ResponseBody
@@ -140,6 +144,15 @@ public class TestController {
         return ResponseBean.responseSuccess(pageInfo);
     }
 
-
+    @RequestMapping(value = "/sendMQMessage.do", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "发送消息到消息队列", notes = "发送消息到消息队列")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "message", value = "消息", required = true, paramType = "query", dataType = "String")
+    })
+    public ResponseBean<PageInfo<Employee>> sendMQMessage(String message) throws Exception{
+        messageProducer.sendMessage(message);
+        return ResponseBean.responseSuccess("发送成功");
+    }
 
 }
