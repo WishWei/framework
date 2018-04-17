@@ -151,7 +151,10 @@ public class TestController {
             @ApiImplicitParam(name = "message", value = "消息", required = true, paramType = "query", dataType = "String")
     })
     public ResponseBean<PageInfo<Employee>> sendMQMessage(String message) throws Exception{
-        messageProducer.sendMessage(message);
+        Employee employee = new Employee();
+        employee.setFirstName(message);
+        employee.setAbout("test");
+        messageProducer.sendMessage(employee);
         return ResponseBean.responseSuccess("发送成功");
     }
 
