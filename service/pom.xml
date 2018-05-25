@@ -78,5 +78,10 @@
             <artifactId>spring-rabbit</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

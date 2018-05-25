@@ -27,6 +27,11 @@
     <!-- 可通过注解控制事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
+    <bean id="zookeeperClient" class="com.wish.common.util.ZookeeperClientUtil">
+        <property name="servers" value="10.28.100.45:2181" />
+        <property name="mainPath" value="/wish" />
+    </bean>
+
 
 
 

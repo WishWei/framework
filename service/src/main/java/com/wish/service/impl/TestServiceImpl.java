@@ -1,11 +1,17 @@
 package com.wish.service.impl;
 
+import com.wish.common.exception.CommonException;
+import com.wish.common.util.ZookeeperClientUtil;
 import com.wish.dao.es.client.TestEsDao;
 import com.wish.dao.redis.TestRedisDao;
 import com.wish.model.vo.Employee;
 import com.wish.model.vo.PageInfo;
 import com.wish.model.vo.TestVO;
 import com.wish.service.TestService;
+import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
+import org.apache.zookeeper.ZooDefs;
+import org.apache.zookeeper.ZooKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
@@ -26,6 +32,9 @@ public class TestServiceImpl implements TestService{
 
     @Autowired
     private TestEsDao testEsDao;
+
+    @Autowired
+    private ZookeeperClientUtil zookeeperClientUtil;
 
     private final static String QUEEN_NAME = "testQueen";
 
@@ -68,6 +77,21 @@ public class TestServiceImpl implements TestService{
 
     public PageInfo<Employee> searchEmployeesByInterest(String key, int page, int pageSize) {
         return testEsDao.searchByInterests(key, page, pageSize);
+    }
+
+    public void addChild(String path, byte[] data) throws Exception{
+        ZooKeeper zk =  zookeeperClientUtil.getAliveZk();
+        try {
+            zk.create(path, data, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        } catch (KeeperException e) {
+            e.printStackTrace();
+            throw new CommonException("创建节点失败");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            throw new CommonException("创建节点失败");
+        }finally {
+            zk.close();
+        }
     }
 
 }

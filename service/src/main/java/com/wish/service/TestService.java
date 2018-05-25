@@ -27,4 +27,6 @@ public interface TestService {
     Employee findEmployeeById(String id);
 
     PageInfo<Employee> searchEmployeesByInterest(String key, int page, int pageSize);
+
+    void addChild(String path, byte[] data) throws Exception;
 }

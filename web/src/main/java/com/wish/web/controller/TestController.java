@@ -158,4 +158,16 @@ public class TestController {
         return ResponseBean.responseSuccess("发送成功");
     }
 
+    @RequestMapping(value = "/addChild.do", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "添加节点到zookeeper", notes = "添加节点到zookeeper")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "path", value = "节点", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "value", value = "数据", required = true, paramType = "query", dataType = "String")
+    })
+    public ResponseBean<String> addChild(String path, String value) throws Exception{
+       testService.addChild(path, value.getBytes());
+        return ResponseBean.responseSuccess("添加节点成功");
+    }
+
 }
